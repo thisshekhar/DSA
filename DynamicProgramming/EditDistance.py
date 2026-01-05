@@ -1,4 +1,7 @@
-# edit  distance between two strings naive recursive approach
+#Given two strings word1 and word2,
+#  the edit distance is the minimum number of operations required to transform word1 into word2.
+
+#  edit  distance between two strings naive recursive approach
 def edit_distance_recursive(X,Y):
     if len(X) == 0:
         return len(Y)
