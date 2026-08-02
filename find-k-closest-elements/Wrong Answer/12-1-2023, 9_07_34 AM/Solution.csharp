@@ -1,0 +1,27 @@
+// https://leetcode.com/problems/find-k-closest-elements
+
+public class Solution {
+    public IList<int> FindClosestElements(int[] arr, int k, int x) {
+        var maxheap = new PriorityQueue<int,int>(Comparer<int>.Create((a,b) => b.CompareTo(a)));
+
+        foreach(int num in arr)
+        {
+
+            maxheap.Enqueue(num,num-x);
+
+            if(maxheap.Count > k)
+            {
+                maxheap.Dequeue();
+            }
+        }
+        IList<int> ans = new List<int>();
+        
+        while(maxheap.Count > 0)
+        {
+
+             ans.Add(maxheap.Dequeue());
+        }
+
+        return ans.OrderBy(v => v).ToList();
+    }
+}

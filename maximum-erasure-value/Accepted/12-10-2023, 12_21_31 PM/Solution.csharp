@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/maximum-erasure-value
+
+public class Solution {
+    public int MaximumUniqueSubarray(int[] nums) {
+        int start = 0;
+        int end = 0;
+        int maxScore = 0;
+        int score = 0;
+        var hashSet = new HashSet<int>();
+        
+        while(end < nums.Length){
+            if(hashSet.Contains(nums[end])){
+                score = score-nums[start];
+                hashSet.Remove(nums[start++]);
+            }
+            else{
+                score += nums[end];
+                hashSet.Add(nums[end++]);
+            }
+            
+            maxScore = Math.Max(maxScore, score);
+        }
+        
+        return maxScore;
+    }
+}

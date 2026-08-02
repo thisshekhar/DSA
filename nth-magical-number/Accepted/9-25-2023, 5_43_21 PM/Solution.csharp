@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/nth-magical-number
+
+public class Solution {
+    public int NthMagicalNumber(int n, int a, int b) {
+       long left = 1;
+        long right = ((long) n + 1) * a;
+        int lcm = a * b / Gcd(a, b);
+
+        while (right - left > 1) {
+            long middle = (left + right) / 2;
+
+            if (Guess(middle, a, b, lcm) >= n) 
+                right = middle;
+            else
+                left = middle;
+        }   
+
+        return (int)(right % 1_000_000_007);
+    }
+
+    private int Gcd(int a, int b)
+    {
+        if(a==0)
+            return b;
+
+        return Gcd(b%a,a);
+    }
+    private static long Guess(long value, int a, int b, int lcm) =>
+        value / a + value / b - value / lcm;
+}

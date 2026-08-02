@@ -1,0 +1,33 @@
+// https://leetcode.com/problems/count-pairs-whose-sum-is-less-than-target
+
+public class Solution {
+    public int CountPairs(IList<int> nums, int target) {
+        int res = 0, n = nums.Count,start =0, end = nums.Count - 1;
+        nums = nums.OrderBy(x => x).ToList();
+        // for(int i =0; i < n -1; i++ )
+        // {
+        //     for(int j = i+ 1; j < n; j++)
+        //     {
+        //         if(nums[i] + nums[j] < target)
+        //         {
+        //             res++;
+        //         }
+        //     }
+        // }
+
+        while(start < end)
+        {
+            if(nums[start] + nums[end] < target)
+            {
+                res += end - start;
+                start++;
+            }
+            else
+            {
+                end--;
+            }
+        }
+
+        return res;
+    }
+}

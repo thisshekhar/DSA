@@ -1,0 +1,19 @@
+// https://leetcode.com/problems/ugly-number-ii
+
+public class Solution {
+    public int NthUglyNumber(int n) {
+        if(n==1)
+            return n;
+        int count  = 0;
+        while(count <= n)
+        {
+            if(count % 2 == 0 || count % 3 == 0 || count % 5 == 0)
+            {
+                count++;
+            }
+            count++;
+        }
+
+        return count;
+    }
+}

@@ -1,0 +1,23 @@
+// https://leetcode.com/problems/total-hamming-distance
+
+public class Solution {
+    public int TotalHammingDistance(int[] nums) {
+        int ans = 0;
+        int n = nums.Length;
+        for(int i = 0; i < 31; i++)
+        {
+            int count = 0;
+
+            for(int j =0; j < n;j++)
+            {
+                if((nums[j] & (1 << i)) > 0)
+                {
+                    count++;
+                }
+            }
+            ans += ( n-count ) * count;
+        }
+
+        return ans;
+    }
+}

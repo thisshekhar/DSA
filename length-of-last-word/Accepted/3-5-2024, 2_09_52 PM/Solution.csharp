@@ -1,0 +1,14 @@
+// https://leetcode.com/problems/length-of-last-word
+
+public class Solution {
+    public int LengthOfLastWord(string s) {
+
+        string[] strArray = s.Trim().Split(' ');
+        int count = 0;
+        foreach(char c in strArray[strArray.Length-1])
+        {
+            count++;
+        }
+        return count;
+    }
+}

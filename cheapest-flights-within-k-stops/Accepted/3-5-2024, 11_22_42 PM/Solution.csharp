@@ -1,0 +1,48 @@
+// https://leetcode.com/problems/cheapest-flights-within-k-stops
+
+public class Solution {
+    public int FindCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+        Dictionary<int,List<int[]>> adj = new();
+        int[] visited = new int[n];
+        Array.Fill(visited,int.MaxValue);
+        visited[src] = 0;
+         foreach (var flight in flights) {
+            if (!adj.ContainsKey(flight[0]))
+                adj[flight[0]] = new List<int[]>();
+            adj[flight[0]].Add(new int[]{flight[1], flight[2]});
+        }
+
+        Queue<int[]> q = new();
+        q.Enqueue(new int[]{src,0});
+        while(q.Count > 0 && k-- >= 0)
+        {
+            int size = q.Count;
+
+            while(size-- > 0)
+            {
+                var curr = q.Dequeue();
+                int currNode = curr[0];
+                int currPrice = curr[1];
+                if(adj.ContainsKey(currNode))
+                {
+                    foreach(var neighbour in adj[currNode] )
+                    {
+                        int newPrice = currPrice + neighbour[1];
+                        if(newPrice < visited[neighbour[0]])
+                        {
+                            visited[neighbour[0]] = newPrice;
+                            q.Enqueue(new int[]{neighbour[0],newPrice}); 
+                        }
+                    }
+                }
+            }
+        }
+
+        if(visited[dst] == int.MaxValue)
+        {
+            return -1;
+        }
+
+        return visited[dst];
+    }
+}

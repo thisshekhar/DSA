@@ -1,0 +1,8 @@
+// https://leetcode.com/problems/truncate-sentence
+
+public class Solution {
+    public string TruncateSentence(string s, int k) {
+       string[] split = s.Split(' ').Take(k).ToArray();
+        return String.Join(' ', split);
+    }
+}

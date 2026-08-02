@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/number-of-good-pairs
+
+public class Solution {
+    public int NumIdenticalPairs(int[] nums) {
+        Dictionary<int,int> dict = new Dictionary<int,int>();
+        int ans = 0;
+        for(int i = 0; i < nums.Length; i++)
+        {
+           int c= dict.GetValueOrDefault(nums[i],0);
+            ans += c;
+            dict[nums[i]] = c + 1;
+        }
+        
+        return ans;
+    }
+}

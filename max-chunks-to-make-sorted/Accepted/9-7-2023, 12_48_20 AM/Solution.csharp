@@ -1,0 +1,20 @@
+// https://leetcode.com/problems/max-chunks-to-make-sorted
+
+public class Solution {
+    public int MaxChunksToSorted(int[] arr) {
+        int chunkCount = 0;
+        int expectedSum = 0;
+        int currSum = 0;
+        for(int i = 0; i < arr.Length; i++)
+        {
+            expectedSum += i;
+            currSum += arr[i];
+            if(expectedSum == currSum)
+            {
+                chunkCount++;
+            }
+        }
+
+        return chunkCount;
+    }
+}

@@ -1,0 +1,36 @@
+// https://leetcode.com/problems/flood-fill
+
+public class Solution {
+    private int[][] image;
+    private int oldColor;
+    private int newColor;
+
+    public int[][] FloodFill(int[][] image, int sr, int sc, int color) {
+        
+        this.image = image;
+        this.oldColor = image[sr][sc];
+        this.newColor = color;
+
+        if (this.oldColor == this.newColor)
+            return image;
+
+        FloodFill(sr, sc);            
+
+        return image;
+    }
+
+    private void FloodFill(int x, int y)
+    {
+        if (x >= 0 && x < image.Length && y >= 0 && y < image[0].Length)
+        {
+            if (image[x][y] == this.oldColor)
+            {
+                image[x][y] = newColor;
+                FloodFill(x + 1, y);
+                FloodFill(x - 1, y);
+                FloodFill(x, y + 1);
+                FloodFill(x, y - 1);
+            }                   
+        }
+    }
+}

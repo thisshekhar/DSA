@@ -1,0 +1,35 @@
+// https://leetcode.com/problems/nth-magical-number
+
+public class Solution {
+    public int NthMagicalNumber(int n, int a, int b) {
+        long left = Math.Min(a,b);
+        long right = (long)(n * Math.Min(a,b));
+        long ans = right;
+        long lcm = (a*b)/Gcd(a,b);
+        while(left <= right)
+        {
+            long mid = (left + right)/2;
+            long cur  = (mid/a) + (mid/b) - (mid/lcm);
+            if(cur >= n)
+            {
+                 ans = mid;
+                 right = mid-1;   
+            }
+            else
+            {
+                left = mid+1;
+            }
+        }
+
+        int mod = 1000000000+7;
+        return (int)ans % mod;
+    }
+
+    private int Gcd(int a, int b)
+    {
+        if(a==0)
+            return b;
+
+        return Gcd(b%a,a);
+    }
+}

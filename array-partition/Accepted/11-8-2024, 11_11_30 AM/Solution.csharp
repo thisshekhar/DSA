@@ -1,0 +1,20 @@
+// https://leetcode.com/problems/array-partition
+
+public class Solution {
+    public int ArrayPairSum(int[] nums) {
+        
+        Array.Sort(nums);
+
+        foreach(int num in nums)
+        {
+            Console.Write(num + ",");
+        }
+        int ans = 0;
+        for(int i = 1; i < nums.Length; i = i +2)
+        {
+            ans += Math.Min(nums[i],nums[i-1]);
+        }
+
+        return ans;
+    }
+}

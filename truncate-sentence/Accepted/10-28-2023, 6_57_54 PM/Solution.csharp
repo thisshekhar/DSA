@@ -1,0 +1,14 @@
+// https://leetcode.com/problems/truncate-sentence
+
+public class Solution {
+    public string TruncateSentence(string s, int k) {
+        string[] t = s.Split(" ");
+        string res = "";
+        for(int i = 0; i < k;i++)
+        {
+            res += t[i] + " ";
+        }
+
+        return res.Trim();
+    }
+}

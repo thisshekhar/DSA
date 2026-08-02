@@ -1,0 +1,12 @@
+// https://leetcode.com/problems/truncate-sentence
+
+public class Solution {
+    public string TruncateSentence(string s, int k) {
+        string[] arr=s.Split(' ');
+        StringBuilder st=new();
+        for(int i=0;i<k-1;i++)
+        st.Append(arr[i]+" ");
+        st.Append(arr[k-1]);
+        return st.ToString();
+    }
+}

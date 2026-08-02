@@ -1,0 +1,96 @@
+// https://leetcode.com/problems/design-linked-list
+
+public class Node
+{
+    public int data;
+    public Node next;
+    public Node(int val)
+    {
+        this.data = val;
+        this.next = null;
+    }
+}
+
+public class MyLinkedList {
+    public Node head;
+    int size;
+    public MyLinkedList() {
+        head = new Node(-1);
+        size = 0;
+    }
+    
+    public int Get(int index) {
+        if(index >= size)
+        {
+            return -1;
+        }
+        Node curr = head.next;
+        for(int i = 0; i < index; i++)
+        {
+            curr = curr.next;
+        }
+        return curr.data;
+    }
+    
+    public void AddAtHead(int val) {
+       Node temp = head.next;
+       Node newNode = new Node(val);
+       head.next = newNode;
+       newNode.next = temp; 
+       size++;
+    }
+    
+    public void AddAtTail(int val) {
+        Node temp = head;
+        while(temp.next != null)
+        {
+            temp = temp.next;
+        }
+
+        temp.next = new Node(val);
+        size++;
+    }
+    
+    public void AddAtIndex(int index, int val) {
+        if(index > size)
+        {
+            return;
+        }
+        Node curr = head;
+        for(int i = 0; i< index; i++)
+        {
+            curr = curr.next;
+        }
+        Node temp = curr.next;
+        curr.next = new Node(val);
+        curr.next.next = temp;
+        size++;
+    }
+    
+    public void DeleteAtIndex(int index) {
+        if(index >= size)
+        {
+            return;
+        }
+        Node curr = head;
+        for(int i = 0; i< index; i++)
+        {
+            curr = curr.next;
+        }
+        Node temp = curr.next;
+        curr.next = temp.next;
+        temp.next = null;
+        size--;
+
+    }
+}
+
+/**
+ * Your MyLinkedList object will be instantiated and called as such:
+ * MyLinkedList obj = new MyLinkedList();
+ * int param_1 = obj.Get(index);
+ * obj.AddAtHead(val);
+ * obj.AddAtTail(val);
+ * obj.AddAtIndex(index,val);
+ * obj.DeleteAtIndex(index);
+ */

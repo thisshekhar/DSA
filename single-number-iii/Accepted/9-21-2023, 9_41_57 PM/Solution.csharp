@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/single-number-iii
+
+public class Solution {
+    public int[] SingleNumber(int[] nums) {
+
+        int xor = 0, x = 0, y = 0;
+        int n = nums.Length;
+        for(int i = 0; i < n; i++)
+        {
+            xor ^= nums[i];
+        }
+
+        int lastSetBit = xor & ~(xor-1);
+
+        for(int i =0; i< n; i++)
+        {
+            if((nums[i] & lastSetBit) != 0)
+            {
+                x ^= nums[i];
+            }
+            else
+            {
+                y ^= nums[i];
+            }
+        }
+        return new int[]{x,y};
+    }
+}

@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/daily-temperatures
+
+public class Solution {
+    public int[] DailyTemperatures(int[] temperatures) {
+       int[] res = new int[temperatures.Length];  
+
+			Stack<int> tempIndex = new Stack<int>();
+
+			tempIndex.Push(0);
+
+			for (int i = 1; i < temperatures.Length; i++)
+			{
+				while (tempIndex.Count != 0)
+				{
+					if (temperatures[tempIndex.Peek()] < temperatures[i])
+					{
+						res[tempIndex.Peek()] = i - tempIndex.Pop();
+					}
+					else
+					{
+						break;
+					}
+				}
+				tempIndex.Push(i);
+			}
+
+			return res;
+    }
+}

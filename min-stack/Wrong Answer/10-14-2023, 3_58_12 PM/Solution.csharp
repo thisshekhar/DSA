@@ -1,0 +1,49 @@
+// https://leetcode.com/problems/min-stack
+
+public class MinStack {
+
+    Stack<int> stack = null;
+    int min = int.MaxValue;
+    int size = 0;
+
+    public MinStack() {
+        stack = new Stack<int>();
+    }
+    
+    public void Push(int val) {
+       if(val< min)
+       {
+           stack.Push(min);
+           min = val;
+       }
+       stack.Push(val);
+        size++;
+    }
+    
+    public void Pop() {
+        if(stack.Peek() == min)
+        {
+            stack.Pop();
+            min = stack.Peek();
+        }
+        stack.Pop();
+        size--;
+    }
+    
+    public int Top() {
+        return stack.Peek();
+    }
+    
+    public int GetMin() {
+        return min;
+    }
+}
+
+/**
+ * Your MinStack object will be instantiated and called as such:
+ * MinStack obj = new MinStack();
+ * obj.Push(val);
+ * obj.Pop();
+ * int param_3 = obj.Top();
+ * int param_4 = obj.GetMin();
+ */

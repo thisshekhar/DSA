@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/maximal-square
+
+public class Solution {
+    public int MaximalSquare(char[][] matrix) {
+        int n = matrix.Length;
+        int m = matrix[0].Length;
+        
+        int max  = 0;
+
+        for(int i = 0; i < n; i++)
+        {
+            for(int j = 0; j < m ; j++)
+            {
+               if(i == 0 || j == 0 || matrix[i][j] == '0') {
+                    max = Math.Max(max, matrix[i][j] - '0');
+                    continue;
+                }
+                
+                var t = Math.Min(Math.Min(matrix[i-1][j], matrix[i][j-1]), matrix[i-1][j-1]) + 1;
+                matrix[i][j] = (char)t;
+
+                max = Math.Max(max, matrix[i][j] - '0');
+            }
+        }
+
+        return max*max;
+    }
+}

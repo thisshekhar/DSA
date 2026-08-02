@@ -1,0 +1,11 @@
+// https://leetcode.com/problems/unique-paths
+
+public class Solution {
+    public int UniquePaths(int m, int n) {
+       if(n==1 || m == 1)
+       {
+           return 1;
+       }
+       return UniquePaths( m, n-1 )  + UniquePaths( m-1, n ) ;
+    }
+}

@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+
+public class Solution {
+    public int MaxProfit(int[] prices) {
+        int buyindex = 0;
+        int sellindex = 1;
+        int maxProfit = 0;
+        while(sellindex < prices.Length)
+        {
+            int buyamount = prices[buyindex];
+            int sellamount = prices[sellindex];
+            if(sellamount > buyamount)
+            {
+                maxProfit = Math.Max(maxProfit, sellamount - buyamount);
+                
+            }
+            else
+            {
+                buyindex = sellindex;
+            }
+            sellindex++;
+        }
+        return maxProfit;
+    }
+}

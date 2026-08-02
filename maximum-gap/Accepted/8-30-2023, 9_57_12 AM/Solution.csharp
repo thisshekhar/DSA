@@ -1,0 +1,87 @@
+// https://leetcode.com/problems/maximum-gap
+
+public class Solution {
+    public int MaximumGap(int[] nums) {
+       // Find maximum and minimum in arr[]
+       int n = nums.Length;
+    int maxVal = nums[0];
+    int minVal = nums[0];
+    for (int i = 1; i < n; i++)
+    {
+        maxVal = Math.Max(maxVal, nums[i]);
+        minVal = Math.Min(minVal, nums[i]);
+    }
+ 
+    // Arrays to store maximum and
+    // minimum values in n-1 buckets
+    // of differences.
+    int []maxBucket = new int[n - 1];
+    int []minBucket = new int[n - 1];
+    maxBucket = maxBucket.Select(i => int.MinValue).ToArray();
+    minBucket = minBucket.Select(i => int.MaxValue).ToArray();
+     
+    // maxBucket.Fill(int.MinValue);
+    // Arrays.fill(minBucket, 0, n - 1, Integer.MAX_VALUE);
+ 
+    // Expected gap for every bucket.
+    float delta = (float) (maxVal - minVal) /
+                  (float) (n - 1);
+ 
+    // Traversing through array elements and
+    // filling in appropriate bucket if bucket
+    // is empty. Else updating bucket values.
+    for (int i = 0; i < n; i++)
+    {
+        if (nums[i] == maxVal || nums[i] == minVal)
+        {
+            continue;
+        }
+ 
+        // Finding index of bucket.
+        int index = (int) (Math.Floor((nums[i] -
+                             minVal) / delta));
+ 
+        // Filling/Updating maximum value of bucket
+        if (maxBucket[index] == int.MinValue)
+        {
+            maxBucket[index] = nums[i];
+        }
+        else
+        {
+            maxBucket[index] = Math.Max(maxBucket[index],
+                                                  nums[i]);
+        }
+ 
+        // Filling/Updating minimum value of bucket
+        if (minBucket[index] == int.MaxValue)
+        {
+            minBucket[index] = nums[i];
+        }
+        else
+        {
+            minBucket[index] = Math.Min(minBucket[index],
+                                                  nums[i]);
+        }
+    }
+ 
+    // Finding maximum difference between
+    // maximum value of previous bucket
+    // minus minimum of current bucket.
+    int prev_val = minVal;
+    int max_gap = 0;
+    for (int i = 0; i < n - 1; i++)
+    {
+        if (minBucket[i] == int.MaxValue)
+        {
+            continue;
+        }
+        max_gap = Math.Max(max_gap, minBucket[i] -
+                                    prev_val);
+        prev_val = maxBucket[i];
+    }
+    max_gap = Math.Max(max_gap, maxVal -
+                                prev_val);
+ 
+    return max_gap;
+    }
+}

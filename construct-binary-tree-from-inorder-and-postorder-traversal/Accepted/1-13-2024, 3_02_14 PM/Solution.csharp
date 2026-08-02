@@ -1,0 +1,52 @@
+// https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public TreeNode BuildTree(int[] inorder, int[] postorder) {
+        int inLenght = inorder.Length;
+        int psLength = postorder.Length;
+
+        if(inorder == null || postorder == null || inLenght != psLength)
+        {
+            return null;
+        }
+
+        Dictionary<int,int> ht = new();
+        for(int i = 0; i < inLenght; i++)
+        {
+            ht.Add(inorder[i],i);
+        }
+        
+        return BuildTreePostin(inorder, 0, inLenght-1,postorder,0,psLength - 1, ht);
+    }
+
+    private TreeNode BuildTreePostin(int[] inorder, int inStart, int inEnd, int[] postorder, int psStart,int psEnd, Dictionary<int,int> ht)
+    {
+        if(inStart > inEnd || psStart > psEnd)
+        {
+            return null;
+        }
+
+        TreeNode root = new TreeNode(postorder[psEnd]);
+
+        int Inroot = ht[postorder[psEnd]];
+
+        int numLeft = Inroot - inStart;
+
+        root.left = BuildTreePostin(inorder, inStart, Inroot -1,postorder,psStart,psStart + numLeft-1, ht);
+        root.right = BuildTreePostin(inorder, Inroot + 1, inEnd,postorder,psStart + numLeft,psEnd-1, ht);
+        return root;
+    }
+}

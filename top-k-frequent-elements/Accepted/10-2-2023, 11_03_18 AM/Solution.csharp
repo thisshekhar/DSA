@@ -1,0 +1,38 @@
+// https://leetcode.com/problems/top-k-frequent-elements
+
+public class Solution {
+    public int[] TopKFrequent(int[] nums, int k) {
+        Dictionary<int,int> dict = new();
+        foreach(int num in nums)
+        {
+            if(dict.ContainsKey(num))
+            {
+                dict[num]++;
+            }
+            else
+            {
+                dict[num] = 1;
+            }
+        }
+
+        PriorityQueue<int,int> pq = new();
+
+        foreach(var key in dict.Keys)
+        {
+            pq.Enqueue(key,dict[key]);
+            if(pq.Count > k)
+            {
+                pq.Dequeue();
+            }
+        }
+
+        int[] res = new int[k];
+        int j = k;
+
+        while(pq.Count > 0)
+        {
+            res[--j] = pq.Dequeue();
+        }
+        return res;
+    }
+}

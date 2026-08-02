@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/find-k-closest-elements
+
+public class Solution {
+    public IList<int> FindClosestElements(int[] arr, int k, int x) {
+       
+       int low = 0, high = arr.Length -1;
+       while(high - low >= k)
+       {
+           if(Math.Abs(arr[low] - x ) > Math.Abs(arr[high] - x))
+           {
+               low++;
+           }
+           else
+           {
+                high--;
+           }
+       }
+
+       IList<int> ans = new List<int>();
+
+       for(int i = low ; i <= high; i++)
+       {
+           ans.Add(arr[i]);
+       }
+
+       return ans;
+    }
+}

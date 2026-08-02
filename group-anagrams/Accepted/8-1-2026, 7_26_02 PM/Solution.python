@@ -1,0 +1,19 @@
+// https://leetcode.com/problems/group-anagrams
+
+class Solution(object):
+    def groupAnagrams(self, strs):
+        """
+        :type strs: List[str]
+        :rtype: List[List[str]]
+        """
+        ans = []
+        seen = {}
+
+        for s in strs:
+            sortedWord = ''.join(sorted(s))
+            if sortedWord in seen:
+                ans[seen[sortedWord]].append(s)
+            else:
+                seen[sortedWord] = len(ans)
+                ans.append([s])
+        return ans

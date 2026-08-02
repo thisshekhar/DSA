@@ -1,0 +1,33 @@
+// https://leetcode.com/problems/subsets
+
+public class Solution {
+    public IList<IList<int>> Subsets(int[] nums) {
+         List<int> subset = new List<int>();
+        IList<IList<int>> res = new  List<IList<int>>();
+        int index = 0;
+        CalcSubset(nums, res, subset, index);
+        return res;
+    }
+     static void CalcSubset(int[] A,
+                           IList<IList<int> > res,
+                           List<int> subset, int index)
+    {
+        // Add the current subset to the result list
+        res.Add(new List<int>(subset));
+ 
+        // Generate subsets by recursively including and
+        // excluding elements
+        for (int i = index; i < A.Length; i++) {
+            // Include the current element in the subset
+            subset.Add(A[i]);
+ 
+            // Recursively generate subsets with the current
+            // element included
+            CalcSubset(A, res, subset, i + 1);
+ 
+            // Exclude the current element from the subset
+            // (backtracking)
+            subset.RemoveAt(subset.Count - 1);
+        }
+    }
+}

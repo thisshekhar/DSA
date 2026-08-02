@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/reverse-words-in-a-string
+
+public class Solution {
+    public string ReverseWords(string s) {
+        string[] arr = s.Trim().Split(' ');
+        int left = 0 , right = arr.Length-1;
+
+        while(left < right)
+        {
+            string temp = arr[left];
+            arr[left] = arr[right];
+            arr[right] = temp;
+            left++;
+            right--;
+        }
+        string ans = "";
+        foreach(string str in arr)
+        {
+            if(str == "")
+            {
+                continue;
+            }
+            ans +=   str + " ";
+        }
+        
+       
+
+        return ans.Trim();
+    }
+}

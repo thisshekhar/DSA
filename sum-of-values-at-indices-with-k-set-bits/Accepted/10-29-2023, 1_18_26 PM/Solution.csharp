@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/sum-of-values-at-indices-with-k-set-bits
+
+public class Solution {
+    public int SumIndicesWithKSetBits(IList<int> nums, int k) {
+        int ans = 0;
+        for(int i = 0; i < nums.Count; i++)
+        {
+            
+            if(CountSetBits(i) == k)
+            {
+                ans+= nums[i];
+            }
+        }
+        return ans;
+    }
+
+    public int CountSetBits(int n)
+    {
+        int setBits = 0;
+        while(n>0)
+        {
+            n = (n & n-1);
+            // setBits += n & 1;
+            setBits++;
+            // n  = n >> 1;
+        }
+        return setBits;
+    }
+}

@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/permutations
+
+public class Solution {
+    public IList<IList<int>> Permute(int[] nums) {
+       IList<IList<int>> lst = new List<IList<int>>();
+        Permute1(nums,lst);
+        return lst;
+    }
+
+    public void Permute1(int[] nums,  IList<IList<int>> lst ,int i = 0) {
+        if(i == nums.Length  - 1)
+        {
+            lst.Add(nums.ToList());
+            return;
+        }
+
+        for(int k = i; k < nums.Length;k++)
+        {
+            int temp;
+            temp = nums[i];
+            nums[i] = nums[k];
+            nums[k] = temp;
+             Permute1(nums,lst, i+1);
+            int temp1 = nums[i];
+            nums[i] = nums[k];
+            nums[k] = temp1;
+        }
+    }
+}

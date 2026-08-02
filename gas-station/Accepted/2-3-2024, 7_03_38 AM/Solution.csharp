@@ -1,0 +1,29 @@
+// https://leetcode.com/problems/gas-station
+
+public class Solution {
+    public int CanCompleteCircuit(int[] gas, int[] cost) {
+        int n = gas.Length;
+        int totalGas = 0 , totalCost = 0, currGas = 0, startpoint = 0;
+
+        for(int i = 0 ; i < n ; i++)
+        {
+            totalGas += gas[i];
+            totalCost += cost[i];
+
+            currGas += gas[i] - cost[i];
+            if(currGas < 0)
+            {
+                startpoint = i+1;
+                currGas = 0;
+            }
+        }
+
+            if(totalCost > totalGas)
+            {
+                return -1;
+            }
+        
+
+        return startpoint;
+    }
+}

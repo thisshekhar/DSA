@@ -1,0 +1,28 @@
+// https://leetcode.com/problems/check-if-two-string-arrays-are-equivalent
+
+public class Solution {
+    public bool ArrayStringsAreEqual(string[] word1, string[] word2) {
+       int wp1 = 0, wp2 = 0, sp1 =0, sp2 = 0;
+
+       while(wp1 < word1.Length && wp2 < word2.Length)
+       {
+           if(word1[wp1][sp1++] != word2[wp2][sp2++])
+           {
+               return false;
+           }
+
+           if(sp1 == word1[wp1].Length)
+           {
+               sp1 = 0;
+               wp1++;
+           }
+           if(sp2 == word2[wp2].Length)
+           {
+               sp2 = 0;
+               wp2++;
+           }
+       }
+
+       return wp1 == word1.Length && wp2 == word2.Length;
+    }
+}

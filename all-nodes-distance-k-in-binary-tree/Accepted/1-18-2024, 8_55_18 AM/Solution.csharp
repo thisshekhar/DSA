@@ -1,0 +1,49 @@
+// https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int x) { val = x; }
+ * }
+ */
+public class Solution {
+    private Dictionary<TreeNode, TreeNode> parentMap;
+    public IList<int> DistanceK(TreeNode root, TreeNode target, int k) {
+        parentMap = new Dictionary<TreeNode, TreeNode>();
+        BuildParentMap(root, null);
+
+        List<int> result = new List<int>();
+        HashSet<TreeNode> visited = new HashSet<TreeNode>();
+
+        DFS(target, k, visited, result);
+        return result;
+    }
+    private void BuildParentMap(TreeNode node, TreeNode parent) 
+    {
+        if (node == null) return;
+        parentMap[node] = parent;
+        BuildParentMap(node.left, node);
+        BuildParentMap(node.right, node);
+    }
+    private void DFS(TreeNode node, int k, HashSet<TreeNode> visited, List<int> result) 
+    {
+        if (node == null || visited.Contains(node)) return;
+
+        visited.Add(node);
+
+        if (k == 0) {
+            result.Add(node.val);
+            return;
+        }
+
+        if (node.left != null) DFS(node.left, k - 1, visited, result);
+        if (node.right != null) DFS(node.right, k - 1, visited, result);
+
+        TreeNode parent;
+        if (parentMap.TryGetValue(node, out parent))
+            DFS(parent, k - 1, visited, result);
+    }
+}

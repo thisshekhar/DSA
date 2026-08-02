@@ -1,0 +1,18 @@
+// https://leetcode.com/problems/maximum-difference-between-increasing-elements
+
+public class Solution {
+    public int MaximumDifference(int[] nums) {
+        int n= nums.Length;
+
+        int res = nums[1] - nums[0];
+        int minVal = nums[0];
+
+        for(int i = 1; i < n; i++)
+        {
+            res = Math.Max(res, nums[i] - minVal);
+            minVal = Math.Min(nums[i], minVal);
+        }
+
+        return res;
+    }
+}

@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/convert-1d-array-into-2d-array
+
+public class Solution {
+    public int[][] Construct2DArray(int[] original, int m, int n) {
+        if(m*n != original.Length)
+        {
+            return new int[][]{};
+        }
+        int[][] result = new int[m][];
+       
+        for(int i = 0 ; i < original.Length;i++)
+        {
+             int row=i/n;
+             int column =i%n;
+             if(column == 0)
+             {
+                 result[row] = new int[n];
+             }
+
+             result[row][column] = original[i];
+        }
+        return result;
+    }
+}

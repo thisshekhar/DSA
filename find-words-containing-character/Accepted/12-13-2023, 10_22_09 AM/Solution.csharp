@@ -1,0 +1,16 @@
+// https://leetcode.com/problems/find-words-containing-character
+
+public class Solution {
+    public IList<int> FindWordsContaining(string[] words, char x) {
+        IList<int> ans  = new List<int>();
+        for(int i = 0; i < words.Length; i++)
+        {
+            if(words[i].Contains(x))
+            {
+                ans.Add(i);
+            }
+        }
+
+        return ans;
+    }
+}

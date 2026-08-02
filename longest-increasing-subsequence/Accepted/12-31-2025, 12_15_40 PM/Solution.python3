@@ -1,0 +1,24 @@
+// https://leetcode.com/problems/longest-increasing-subsequence
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        res = []
+
+        for n in nums:
+             pos = self.binary_search(res, n)
+             if pos == len(res):
+                res.append(n)
+             else:
+                res[pos] = n
+
+        return len(res)
+
+    def binary_search(self,sub, x):
+        left, right = 0, len(sub) - 1
+        while left <= right:
+            mid = (left + right) // 2
+            if sub[mid] < x:
+                left = mid + 1
+            else:
+                right = mid - 1
+        return left  # insertion position

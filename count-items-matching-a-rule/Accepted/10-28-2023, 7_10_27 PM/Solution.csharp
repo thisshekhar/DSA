@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/count-items-matching-a-rule
+
+public class Solution {
+    public int CountMatches(IList<IList<string>> items, string ruleKey, string ruleValue) {
+        int count = 0;
+        int index = 0;
+        switch(ruleKey)
+        {
+            case "color":
+                index = 1;
+                break;
+            case "type":
+                index = 0;
+                break;
+            case "name":
+                index = 2;
+                break;    
+        }
+
+        foreach(var item in items)
+        {
+            
+                if(item[index] == ruleValue)
+                {
+                    count++;
+                }
+            
+        }
+
+        return count;
+    }
+}

@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/max-consecutive-ones
+
+public class Solution {
+    public int FindMaxConsecutiveOnes(int[] nums) {
+        int result = 0;
+        int count = 0;
+        for(int i = 0 ; i < nums.Length; i++)
+        {
+            if(nums[i] == 0)
+            {
+                 result = Math.Max(count,result);
+                 count = 0;
+            }
+            else
+            {
+               count++;
+            }
+        }
+       
+        return Math.Max(count,result);
+    }
+}

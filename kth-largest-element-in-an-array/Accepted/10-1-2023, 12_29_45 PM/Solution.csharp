@@ -1,0 +1,21 @@
+// https://leetcode.com/problems/kth-largest-element-in-an-array
+
+public class Solution {
+    public int FindKthLargest(int[] nums, int k) {
+         PriorityQueue<int,int> maxHeap = new();
+ 
+        // Iterate through the array elements
+        foreach (var num in nums)
+        {
+            // Add the current element to the max heap
+            maxHeap.Enqueue(num,num);
+ 
+            // If the size of the max heap exceeds K, remove the largest element
+            if (maxHeap.Count > k)
+                maxHeap.Dequeue();
+        }
+ 
+        // Return the Kth smallest element (top of the max heap)
+        return maxHeap.Peek();
+    }
+}

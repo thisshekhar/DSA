@@ -1,0 +1,60 @@
+// https://leetcode.com/problems/minimum-window-substring
+
+public class Solution {
+    public string MinWindow(string s, string t) {
+        var dict = new Dictionary<char, int>();
+
+            foreach (var v in t)
+            {
+                if (!dict.ContainsKey(v))
+                {
+                    dict.Add(v, 0);
+                }
+
+                dict[v]++;
+            }
+
+            int right = 0;
+            int left = 0;
+            int counter = 0;
+            int head = 0;
+            int len = int.MaxValue;
+
+            while (right < s.Length)
+            {
+                if (dict.ContainsKey(s[right]))
+                {
+                    dict[s[right]]--;
+
+                    if (dict[s[right]] == 0)
+                    {
+                        counter++;
+                    }
+                }
+                right++;
+
+                while (counter == dict.Count)
+                {
+                    if (right - left < len)
+                    {
+                        len = right - left;
+                        head = left;
+                    }
+                    
+                    if (dict.ContainsKey(s[left]))
+                    {
+                        dict[s[left]]++;
+
+                        if (dict[s[left]] > 0)
+                        {
+                            counter--;
+                        }
+                    }
+
+                    left++;
+                }
+            }
+
+            return len == int.MaxValue ? string.Empty : s.Substring(head, len);
+    }
+}

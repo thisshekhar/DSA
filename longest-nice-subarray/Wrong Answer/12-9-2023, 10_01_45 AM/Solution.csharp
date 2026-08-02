@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/longest-nice-subarray
+
+public class Solution {
+    public int LongestNiceSubarray(int[] nums) {
+        int count = 1;
+        int n = nums.Length;
+
+        for(int i = 0; i < n-1; i++)
+        {
+            int j = i + 1;
+            int res = 1;
+            while(j< n && (nums[i] & nums[j]) == 0)
+            {
+                j++;
+                res++;
+                if(res > count)
+                {
+                    count = res;
+                }
+            }
+
+            //count = Math.Max(count, j-i);
+        }
+        return count;
+    }
+}

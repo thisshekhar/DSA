@@ -1,0 +1,34 @@
+// https://leetcode.com/problems/candy
+
+public class Solution {
+    public int Candy(int[] ratings) {
+        int n = ratings.Length;
+
+        int[]  temp = new int[n];
+
+        Array.Fill(temp,1);
+
+        for(int i = 1; i < n ; i++)
+        {
+            if(ratings[i] > ratings[i-1])
+            {
+                temp[i] = temp[i-1] + 1;
+            }
+        }
+        for(int i = n-2; i >= 0 ; i--)
+        {
+            if(ratings[i] > ratings[i+1])
+            {
+                temp[i] = Math.Max(temp[i+1] + 1,temp[i]);
+            }
+        }
+
+        int sum = 0;
+        for(int i = 0; i < n; i++)
+        {
+            sum += temp[i];
+        }
+
+        return sum;
+    }
+}

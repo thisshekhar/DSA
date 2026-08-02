@@ -1,0 +1,66 @@
+// https://leetcode.com/problems/01-matrix
+
+public class Solution {
+    public int[][] UpdateMatrix(int[][] mat) {
+        int m = mat.Length;
+        int n = mat[0].Length;
+
+        Queue<IList<int>> queue = new Queue<IList<int>>();
+
+        int[][] dist = new int[m][];
+
+        for(int i = 0; i < m; i++)
+        {
+            dist[i] = new int[n];
+        }
+
+        for(int i = 0 ; i < m; i++)
+        {
+            for(int j = 0 ; j < n; j++)
+            {
+                if(mat[i][j] == 0)
+                {
+                    dist[i][j] = 0;
+                    queue.Enqueue(new List<int>{i,j});
+                }
+                else
+                {
+                    dist[i][j] = -1;
+                }
+            }
+        }
+
+        var directions = new List<IList<int>>{
+
+            new List<int>{1,0},
+            new List<int>{-1,0},
+            new List<int>{0,1},
+            new List<int>{0,-1}
+        };
+
+
+        while(queue.Count > 0)
+        {
+            IList<int> temp = queue.Dequeue();
+            int x = temp[0], y = temp[1];
+
+            for(int i = 0; i < 4; i++)
+            {
+                int dx = x + directions[i][0];
+                int dy = y + directions[i][1];
+
+
+                if(dx >= 0 && dx < m && dy >= 0 && dy < n && dist[dx][dy] == -1)
+                {
+                    dist[dx][dy] = 1 + dist[x][y];
+                    queue.Enqueue(new List<int>{dx,dy});
+                }
+
+            }
+
+
+        }
+
+        return dist;
+    }
+}

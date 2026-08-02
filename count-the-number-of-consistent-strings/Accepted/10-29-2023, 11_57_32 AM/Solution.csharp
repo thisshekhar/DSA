@@ -1,0 +1,35 @@
+// https://leetcode.com/problems/count-the-number-of-consistent-strings
+
+public class Solution {
+    public int CountConsistentStrings(string allowed, string[] words) {
+        HashSet<char> chars = new();
+        int count = 0;
+
+        foreach(char c in allowed)
+        {
+            chars.Add(c);
+        }
+
+        for(int i = 0; i< words.Length; i++)
+        {
+            bool isAllowed = true;
+
+            for(int j =0; j < words[i].Length; j++)
+            {
+                if(!chars.Contains(words[i][j]))
+                {
+                    isAllowed = false;
+                    break;
+                }
+            }
+
+            if(isAllowed)
+            {
+                count++;
+            }
+        }
+
+        return count;
+
+    }
+}

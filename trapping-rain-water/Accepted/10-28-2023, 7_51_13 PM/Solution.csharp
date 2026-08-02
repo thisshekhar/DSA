@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/trapping-rain-water
+
+public class Solution {
+    public int Trap(int[] height) {
+        int water = 0;
+        int n = height.Length;
+        int[] leftMaxSum = new int[n];
+        leftMaxSum[0]= height[0];
+        Console.Write(leftMaxSum[0] + ",");
+        for(int i = 1; i < n; i++)
+        {
+            leftMaxSum[i] = Math.Max(leftMaxSum[i-1],height[i]);
+            Console.Write(leftMaxSum[i] + ",");
+        }
+        Console.WriteLine();
+        int[] rightMaxSum = new int[n];
+        rightMaxSum[n-1]= height[n-1];
+       
+        for(int i = n-2; i >= 0; i--)
+        {
+            rightMaxSum[i] = Math.Max(rightMaxSum[i+1],height[i]);
+            Console.Write(rightMaxSum[i] + ",");
+        }
+
+        for(int i = 0; i < n; i++)
+        {
+            water += Math.Min(leftMaxSum[i], rightMaxSum[i]) - height[i];
+        }
+
+        return water;
+    }
+}

@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/find-the-duplicate-number
+
+public class Solution {
+    public int FindDuplicate(int[] nums) {
+        
+       int i =0, j = nums.Length - 1;
+        int c = 0; int mid;
+        
+        while(i < j)
+        {
+            mid = (i + j )/2;
+            c=0;
+            
+            for(int k = 0 ; k < nums.Length; k++)
+            {
+                if(nums[k] <= mid)
+                        c++;
+            }
+            
+            if(c > mid)
+                j = mid;
+            else
+                i = mid+1;
+            
+           
+        }
+        
+         return i;
+    }
+}

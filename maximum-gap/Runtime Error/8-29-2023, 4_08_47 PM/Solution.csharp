@@ -1,0 +1,39 @@
+// https://leetcode.com/problems/maximum-gap
+
+public class Solution {
+    public int MaximumGap(int[] nums) {
+        int max = nums[0];
+        int n = nums.Length;
+
+        int ans = 0;
+        if(n<2)
+        {
+            return ans;
+        }
+        for(int i=1; i < n; i++)
+        {
+            max = Math.Max(max,nums[i]);
+        }
+
+        bool[] res = new bool[max+1];
+        for(int i = 0; i <n; i++)
+        {
+            res[nums[i]] = true;
+        }
+
+        int prev = -1;
+        for(int i = 0; i <= max; i++)
+        {
+            if(prev == -1 && res[i])
+            {
+                prev = i;
+            }
+            else if(res[i])
+            {
+                ans = Math.Max(ans,i-prev);
+                prev = i;
+            }
+        }
+        return ans;
+    }
+}

@@ -1,0 +1,14 @@
+// https://leetcode.com/problems/powx-n
+
+public class Solution {
+    public double MyPow(double x, int n) {
+        bool flag = n >0 ? true : false;
+        n = Math.Abs(n);
+        if(n <=1)
+        {
+            return x;
+        }
+
+        return flag ? x  * MyPow(x, n-1) : 1/(x  * MyPow(x, n-1));
+    }
+}

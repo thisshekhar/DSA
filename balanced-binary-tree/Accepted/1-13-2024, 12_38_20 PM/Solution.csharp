@@ -1,0 +1,52 @@
+// https://leetcode.com/problems/balanced-binary-tree
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val=0, TreeNode left=null, TreeNode right=null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+public class Solution {
+    public bool IsBalanced(TreeNode root) {
+        int height = IsBalanced1(root);
+        if(height == -1)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public int IsBalanced1(TreeNode root)
+    {
+        if(root == null)
+        {
+            return 0    ;
+        }
+        int leftHeight = IsBalanced1(root.left);
+        if(leftHeight == -1)
+        {
+            return -1;
+        }
+        int rightHeight = IsBalanced1(root.right);
+        if(rightHeight == -1)
+        {
+            return -1;
+        }
+        if(Math.Abs(leftHeight - rightHeight) > 1)
+        {
+            return -1;
+        }
+        else
+        {
+            return Math.Max(leftHeight,rightHeight) +1;
+        }
+    }
+}

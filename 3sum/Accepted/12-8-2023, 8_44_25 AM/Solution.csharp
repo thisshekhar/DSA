@@ -1,0 +1,52 @@
+// https://leetcode.com/problems/3sum
+
+public class Solution {
+    public IList<IList<int>> ThreeSum(int[] nums) {
+        IList<IList<int>> ans = new List<IList<int>>();
+        int n = nums.Length;
+        Array.Sort(nums);
+        for(int i = 0; i < n-2; i++)
+        {
+             if (nums[i] > 0) 
+             {
+                 break; 
+             }
+             if (i > 0 && nums[i] == nums[i - 1])
+             {
+                 continue;
+             }
+             
+            int low = i +1;
+            int high = n-1;
+
+            while(low < high)
+            {
+                int sum = nums[i] + nums[low] + nums[high];
+                if (sum == 0)
+                {
+                    ans.Add(new List<int>(){nums[i] , nums[low] , nums[high]});
+                    while(low < high && nums[low] == nums[low+1])
+                    {
+                        low++;
+                    }
+                    while(low < high && nums[high] == nums[high-1])
+                    {
+                        high--;
+                    }
+                    low++;
+                    high--;
+                }
+                else if (sum > 0)
+                {
+                    high--;
+                }
+                else
+                {
+                    low++;
+                }
+            }
+        }
+
+        return ans;
+    }
+}

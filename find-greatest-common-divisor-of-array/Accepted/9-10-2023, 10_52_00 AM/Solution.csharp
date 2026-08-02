@@ -1,0 +1,26 @@
+// https://leetcode.com/problems/find-greatest-common-divisor-of-array
+
+public class Solution {
+    public int FindGCD(int[] nums) {
+        int Min = int.MaxValue;
+        int Max =  int.MinValue;
+        int n = nums.Length;
+        for(int i = 0; i < n;i++)
+        {
+            Min = Math.Min(Min,nums[i]);
+            Max = Math.Max(Max,nums[i]);
+        }
+
+        return gcd(Min,Max);
+    }
+
+    public int gcd(int a , int b)
+    {
+        if(a == 0)
+        {
+            return b;
+        }
+
+       return  gcd(b%a,a);
+    }
+}

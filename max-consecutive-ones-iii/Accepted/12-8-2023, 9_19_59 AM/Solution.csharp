@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/max-consecutive-ones-iii
+
+public class Solution {
+    public int LongestOnes(int[] nums, int k) {
+        int i=0, j=0,flips =0,ans =0;
+        int n = nums.Length;
+
+        while(i < n )
+        {
+            if(nums[i] == 0)
+            {
+                flips++;
+            }
+
+            while(flips > k)
+            {
+                if(nums[j] == 0)
+                {
+                    flips--;
+                }
+
+                j++;
+            }
+
+            ans = Math.Max(ans,i-j+1);
+            i++;
+        }
+
+        return ans;
+
+    }
+}

@@ -1,0 +1,27 @@
+// https://leetcode.com/problems/merge-sorted-array
+
+public class Solution {
+    public void Merge(int[] nums1, int m, int[] nums2, int n) {
+       if(n ==0)
+            return;
+       int len = m+n-1;
+       int counter1 = m-1;
+       int counter2 = n-1;
+
+       while(counter2 >= 0)
+       {
+         if(counter1 >= 0 && nums1[counter1] >= nums2[counter2])
+         {
+            nums1[len] = nums1[counter1];
+            counter1--;
+         }
+         else
+         {
+            nums1[len] = nums2[counter2];
+            counter2--;
+         }
+
+         len--;
+       }
+    }
+}

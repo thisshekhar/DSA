@@ -1,0 +1,54 @@
+// https://leetcode.com/problems/find-median-from-data-stream
+
+public class MedianFinder {
+
+    PriorityQueue<int, int> max = new(Comparer<int>.Create((x, y) => y.CompareTo(x)));
+    PriorityQueue<int, int> min = new(Comparer<int>.Create((x, y) => x.CompareTo(y)));
+   
+    public MedianFinder() {
+    }
+    
+    public void AddNum(int num) {
+
+       
+         // always add to maxheap
+        //max hea[ holds first half part]
+        
+        max.Enqueue(num,num);
+
+        // check size of both heap
+
+        if(max.Count - min.Count > 1)
+        {
+           Console.WriteLine(max.Peek());
+            min.Enqueue(max.Peek(), max.Dequeue());
+           
+        }
+
+        // if first half have greater element
+         if(max.Count > 0 && min.Count > 0 )
+        {
+            if(max.Peek() > min.Peek())
+            {
+                min.Enqueue(max.Peek(),max.Dequeue());
+                max.Enqueue(min.Peek(),min.Dequeue());
+                
+            }
+        }
+    }
+    
+    public double FindMedian() {
+        if(min.Count == max.Count)
+        {
+            return (double)(min.Peek() + max.Peek()) /2 ;
+        }
+        return max.Peek();
+    }
+}
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.AddNum(num);
+ * double param_2 = obj.FindMedian();
+ */

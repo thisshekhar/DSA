@@ -1,0 +1,32 @@
+// https://leetcode.com/problems/divide-two-integers
+
+public class Solution {
+    public int Divide(int dividend, int divisor) {
+      if(dividend == int.MaxValue && divisor == -1)
+      {
+        return int.MaxValue;
+      }
+       if(dividend == int.MinValue << 31 && divisor == 1)
+      {
+        return int.MaxValue;
+      }
+
+       bool sign  = dividend >= 0 == divisor >= 0 ? true : false;
+       
+       divisor = Math.Abs(divisor);
+       dividend = Math.Abs(dividend);
+       int result = 0;
+       while(dividend - divisor >= 0)
+       {
+           int count = 0;
+           while(dividend - (divisor << 1 << count) >= 0)
+           {
+               count++;
+           }
+
+           result += 1 << count;
+           dividend -= divisor << count ;
+       }
+       return sign?result: -result ;
+    }
+}

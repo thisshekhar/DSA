@@ -1,0 +1,54 @@
+// https://leetcode.com/problems/subarrays-with-k-different-integers
+
+public class Solution {
+    public int SubarraysWithKDistinct(int[] nums, int k) {
+         int n = nums.Length;
+ 
+        int i = 0;
+        int j = 0;
+        int count = 0;
+        int ans = 0;
+        int[] arr = new int[n + 5];
+        while (j < n) {
+            arr[nums[j]]++;
+            if (arr[nums[j]] == 1) {
+                count++;
+            }
+ 
+            while (count > k) {
+                arr[nums[i]]--;
+                if (arr[nums[i]] == 0) {
+                    count--;
+                }
+                i++;
+            }
+ 
+            if (count == k) {
+                int val = i;
+                while (count == k) {
+                    ans++;
+ 
+                    int num = nums[val];
+                    arr[num]--;
+                    if (arr[num] == 0) {
+                        count--;
+                    }
+                    val++;
+                }
+ 
+                val--;
+                while (val >= i) {
+                    int num = nums[val];
+                    arr[num]++;
+                    if (arr[num] == 1) {
+                        count++;
+                    }
+                    val--;
+                }
+            }
+            j++;
+        }
+ 
+        return ans;
+    }
+}

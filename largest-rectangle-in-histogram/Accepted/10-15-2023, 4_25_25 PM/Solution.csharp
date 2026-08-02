@@ -1,0 +1,30 @@
+// https://leetcode.com/problems/largest-rectangle-in-histogram
+
+public class Solution {
+    public int LargestRectangleArea(int[] heights) {
+        Stack<int> s = new Stack<int>();
+        int res = 0, n = heights.Length;
+        int tp;
+        int curr;
+
+        for (int i = 0; i < n; i++)
+        {
+            while (s.Count > 0 && heights[s.Peek()] >= heights[i])
+            {
+                tp = s.Pop();
+                curr = heights[tp] * (s.Count == 0 ? i : i - s.Peek() - 1);
+                res = Math.Max(res, curr);
+            }
+            s.Push(i);
+        }
+
+        while (s.Count > 0)
+        {
+            tp = s.Pop();
+            curr = heights[tp] * (s.Count == 0 ? n : n - s.Peek() - 1);
+            res = Math.Max(res, curr);
+        }
+
+        return res;
+    }
+}

@@ -1,0 +1,15 @@
+// https://leetcode.com/problems/best-time-to-buy-and-sell-stock
+
+public class Solution {
+    public int MaxProfit(int[] prices) {
+        int maxprice = 0;
+        int minprice = prices[0];
+        for(int i = 1; i < prices.Length; i++)
+        {
+            maxprice = Math.Max(maxprice, prices[i]-minprice);
+            minprice = Math.Min(minprice,prices[i]);
+        }
+
+        return maxprice;
+    }
+}

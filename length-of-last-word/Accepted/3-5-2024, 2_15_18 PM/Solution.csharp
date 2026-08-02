@@ -1,0 +1,11 @@
+// https://leetcode.com/problems/length-of-last-word
+
+public class Solution {
+    public int LengthOfLastWord(string s) {
+
+        s = s.Trim();
+        string lastWord = s.Substring(s.LastIndexOf(' ') +1);
+        
+        return lastWord.Length;
+    }
+}

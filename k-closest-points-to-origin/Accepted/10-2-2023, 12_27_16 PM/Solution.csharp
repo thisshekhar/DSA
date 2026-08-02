@@ -1,0 +1,22 @@
+// https://leetcode.com/problems/k-closest-points-to-origin
+
+public class Solution {
+    public int[][] KClosest(int[][] points, int k) {
+        var priorityQueue = new PriorityQueue<int[], int>(Comparer<int>.Create((a, b) => b.CompareTo(a)));
+        int[][] result = new int[k][];
+
+        for (int i = 0; i < points.Length; i++)
+        {
+            priorityQueue.Enqueue(points[i], points[i][0] * points[i][0] + points[i][1] * points[i][1]);
+            if (priorityQueue.Count > k)
+            {
+                priorityQueue.Dequeue();
+            }
+        }
+
+        for (int i = 0; i < k; i++)
+            result[i] = priorityQueue.Dequeue();
+
+        return result;
+    }
+}

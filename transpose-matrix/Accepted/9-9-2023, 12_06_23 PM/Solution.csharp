@@ -1,0 +1,25 @@
+// https://leetcode.com/problems/transpose-matrix
+
+public class Solution {
+    public int[][] Transpose(int[][] matrix) {
+        int rows = matrix.Length;
+        int columns = matrix[0].Length;
+        int[][] transposeMatrix = new int[columns][];
+        for(int i =0 ; i < columns; i++)
+        {
+            transposeMatrix[i] = new int[rows];
+        }
+        for(int i = 0; i < rows; i++)
+        {
+            for(int j = 0 ;j < columns; j++)
+            {
+                //transposeMatrix[i] = new int[columns];
+               
+                transposeMatrix[j][i] = matrix[i][j];
+               
+            }
+        }
+
+        return transposeMatrix;
+    }
+}
